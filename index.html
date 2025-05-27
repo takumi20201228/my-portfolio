@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takumi Someya - Strategic Product Visionary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0e1a;
+            color: #e2e8f0;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Progress Indicator */
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(51, 65, 85, 0.3);
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Navigation */
+        .nav-section {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid #334155;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            margin-top: 4px; /* For progress bar */
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-logo {
+            font-weight: 900;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-item {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: #3b82f6;
+        }
+
+        .nav-item:hover::after, .nav-item.active::after {
+            width: 100%;
+        }
+
+        /* Chapter Navigation Sidebar */
+        .chapter-nav {
+            display: none; 
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 999;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 15px 10px;
+            backdrop-filter: blur(20px);
+            max-width: 150px;
+            width: 150px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .chapter-nav-item {
+            display: block;
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 8px 10px;
+            margin-bottom: 6px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            font-size: 0.8rem;
+        }
+
+        .chapter-nav-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+            transform: translateX(5px);
+            border-left-color: #3b82f6;
+        }
+
+        .chapter-nav-item.active {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            border-left-color: #3b82f6;
+        }
+
+        .chapter-period {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #3b82f6;
+            margin-bottom: 2px;
+        }
+
+        .chapter-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            line-height: 1.1;
+        }
+
+        /* New Hero Section Styles */
+        .main-hero-section {
+            padding-top: 120px; 
+            padding-bottom: 80px;
+            background: linear-gradient(145deg, #0f172a 0%, #17213a 50%, #0f172a 100%);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh; 
+        }
+
+        .main-hero-container {
+            max-width: 1000px; 
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .main-hero-image-wrapper {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid #3b82f6;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.25);
+            flex-shrink: 0; 
+        }
+
+        .main-hero-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .main-hero-text-content {
+           /* Centering handled by parent */
+        }
+
+        .main-hero-name {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #a5b4fc, #c7d2fe, #e0e7ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .main-hero-tagline {
+            font-size: 1.4rem;
+            color: #94a3b8;
+            font-weight: 400;
+            line-height: 1.5;
+            margin: 0 auto;
+            white-space: nowrap; 
+        }
+
+
+        /* Core Identity Section */
+        .core-identity-section {
+            padding: 120px 0; 
+            background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
+            position: relative;
+        }
+
+        .identity-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .identity-grid {
+            display: grid;
+            gap: 60px;
+            margin-top: 80px;
+        }
+
+        /* Origin Story */
+        .origin-story {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.8));
+            border: 1px solid #334155;
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-header {
+            margin-bottom: 30px;
+        }
+
+        .story-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .story-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #f1f5f9;
+            margin-bottom: 10px;
+        }
+
+        .story-content {
+            font-size: 1.25rem;
+            color: #cbd5e1;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Benefits Framework */
+        .benefits-framework {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.8));
+            border: 1px solid #334155;
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .benefit-card.functional:hover { border-color: #10b981; }
+        .benefit-card.emotional:hover { border-color: #3b82f6; }
+        .benefit-card.expression:hover { border-color: #8b5cf6; }
+
+        .benefit-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .benefit-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 8px;
+        }
+
+        .benefit-subtitle {
+            font-size: 0.875rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .benefit-description {
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .benefit-metrics {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
+        .metric-item {
+            text-align: center;
+        }
+
+        .metric-value {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #10b981;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        .emotional-indicators {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .indicator {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .expression-values {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .value {
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Jobs Framework */
+        .jobs-framework {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.6));
+            border: 1px solid #334155;
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+        }
+
+        .framework-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #f1f5f9;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .job-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid #475569;
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .job-card:hover {
+            border-color: #f59e0b;
+            transform: translateY(-3px);
+        }
+
+        .job-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .job-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .job-description {
+            color: #94a3b8;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* SVG Journey Path */
+        .journey-path-section {
+            padding: 100px 0;
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+        }
+
+        .path-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative; /* Needed for absolute positioning of tooltip */
+        }
+
+        .journey-svg {
+            width: 100%;
+            height: 400px;
+            margin-bottom: 60px;
+        }
+
+        /* Chapter Header */
+        .chapter-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .chapter-number {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #3b82f6;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .chapter-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #f1f5f9, #94a3b8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .chapter-subtitle { 
+            font-size: 1.5rem;
+            color: #94a3b8; 
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Tooltip for SVG points */
+        .tooltip {
+            position: absolute;
+            background: rgba(15, 23, 42, 0.95); 
+            border: 1px solid #3b82f6; 
+            border-radius: 8px; 
+            padding: 8px 12px; 
+            color: #f1f5f9;
+            font-size: 0.85rem; 
+            pointer-events: none; 
+            opacity: 0; 
+            transform: translateX(-50%) translateY(5px); /* Initial state: 5px down from final position */
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out; 
+            z-index: 1001;
+            max-width: 260px; 
+            backdrop-filter: blur(10px); 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+            line-height: 1.4; 
+        }
+
+        .tooltip.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0); /* Final state: at JS calculated top */
+        }
+
+        .tooltip-title {
+            font-weight: 700;
+            color: #3b82f6; 
+            margin-bottom: 5px; 
+            font-size: 0.9rem; 
+        }
+
+        .tooltip-content {
+            color: #cbd5e1; 
+        }
+
+        /* Default arrow (tooltip above point, arrow points down from tooltip) */
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-top: 7px solid #3b82f6; 
+        }
+
+        /* Arrow when tooltip is placed below point (arrow points up from tooltip) */
+        .tooltip.placed-below::after {
+            top: auto; 
+            bottom: 100%; 
+            border-top: none; 
+            border-bottom: 7px solid #3b82f6; 
+        }
+
+
+        /* Story Chapters */
+        .chapter-section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .chapter-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Journey Timeline */
+        .journey-timeline {
+            position: relative;
+            padding: 60px 0;
+        }
+
+        .journey-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #10b981, #3b82f6, #8b5cf6, #f59e0b);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .journey-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 120px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .journey-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .journey-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .journey-content {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.8));
+            border: 1px solid #334155;
+            border-radius: 24px;
+            padding: 40px;
+            margin: 0 60px;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .journey-content:hover {
+            transform: scale(1.02);
+            border-color: #3b82f6;
+            box-shadow: 0 25px 50px rgba(59, 130, 246, 0.2);
+        }
+
+        .journey-era {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .journey-title { 
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: #f1f5f9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .journey-company {
+            color: #3b82f6;
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .journey-story { 
+            font-size: 1.125rem;
+            color: #cbd5e1;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .journey-achievements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .achievement-metric {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid #475569;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-metric:hover {
+            border-color: #10b981;
+            transform: translateY(-3px);
+        }
+
+        .achievement-value {
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: #10b981;
+            display: block;
+        }
+
+        .achievement-label {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+        .journey-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border: 1px solid #475569;
+            color: #94a3b8;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .journey-dot {
+            position: absolute;
+            left: 50%;
+            top: 50px;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border: 4px solid #0f172a;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Future Vision */
+        .future-section {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .future-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .future-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .future-text { 
+            max-width: 600px;
+            margin-left: 60px; 
+        }
+        .future-text .journey-title { 
+        }
+        .future-text .journey-story { 
+        }
+
+
+        .future-vision {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid #334155;
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vision-roadmap {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .vision-milestone {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 16px;
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+        }
+
+        .vision-milestone:nth-child(1) { border-left-color: #10b981; }
+        .vision-milestone:nth-child(2) { border-left-color: #3b82f6; }
+        .vision-milestone:nth-child(3) { border-left-color: #8b5cf6; }
+
+        .vision-milestone:hover {
+            transform: translateX(10px);
+            background: rgba(30, 41, 59, 0.8);
+        }
+
+        .milestone-year {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #3b82f6;
+            min-width: 100px;
+        }
+
+        .milestone-title {
+            font-weight: 700;
+            color: #f1f5f9;
+            font-size: 1.125rem;
+        }
+
+        .milestone-desc {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            margin-top: 4px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 100px 0;
+            text-align: center;
+            border-top: 1px solid #334155;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .cta-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-description {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            margin-bottom: 50px;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.125rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid #3b82f6;
+            color: #3b82f6;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+            font-size: 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes pathDraw {
+            from {
+                stroke-dashoffset: 1000;
+            }
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .future-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+                text-align: center;
+            }
+            .future-text { 
+                margin-left: 0; 
+                max-width: 100%; 
+            }
+            
+            .journey-item {
+                flex-direction: column !important;
+            }
+            
+            .journey-content {
+                margin: 20px 0;
+            }
+            
+            .journey-line {
+                display: none;
+            }
+        }
+
+        @media (min-width: 768px) {
+             .main-hero-section {
+                min-height: calc(80vh - 74px); 
+                padding-top: 74px; 
+            }
+            .main-hero-container {
+                flex-direction: row;
+                text-align: left;
+                gap: 40px; 
+            }
+            .main-hero-image-wrapper {
+                width: 220px;
+                height: 220px;
+                margin-bottom: 0;
+            }
+            .main-hero-text-content {
+                text-align: left;
+            }
+            .main-hero-name {
+                font-size: 4rem;
+            }
+            .main-hero-tagline {
+                font-size: 1.6rem;
+                margin: 0; 
+                white-space: nowrap; 
+            }
+        }
+
+
+        @media (max-width: 1200px) {
+        }
+
+        @media (max-width: 767px) { 
+            .main-hero-name {
+                font-size: 2.5rem; 
+            }
+            .main-hero-tagline {
+                font-size: 1.2rem; 
+            }
+            .chapter-title { 
+                font-size: 2.5rem;
+            }
+            
+            .nav-menu {
+                display: none; 
+            }
+            
+            .chapter-container, .cta-container, .identity-container, .path-container, .future-content { 
+                padding: 0 20px; 
+            }
+             .future-text { 
+                margin-left: 0;
+             }
+
+
+            .benefits-framework {
+                grid-template-columns: 1fr;
+            }
+
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tooltip {
+                max-width: 250px;
+                font-size: 0.8rem;
+                padding: 12px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-indicator">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="chapter-nav">
+        <a href="#foundation" class="chapter-nav-item" data-chapter="foundation">
+            <div class="chapter-period">2014-2016</div>
+            <div class="chapter-name">Foundation Builder</div>
+        </a>
+        <a href="#evolution" class="chapter-nav-item" data-chapter="evolution">
+            <div class="chapter-period">2016-2022</div>
+            <div class="chapter-name">Systems Leader</div>
+        </a>
+        <a href="#transformation" class="chapter-nav-item" data-chapter="transformation">
+            <div class="chapter-period">2022-2024</div>
+            <div class="chapter-name">Strategic Transformer</div>
+        </a>
+        <a href="#mastery" class="chapter-nav-item" data-chapter="mastery">
+            <div class="chapter-period">2024-Present</div>
+            <div class="chapter-name">AI Strategy Leader</div>
+        </a>
+        <a href="#future" class="chapter-nav-item" data-chapter="future">
+            <div class="chapter-period">2025-2030+</div>
+            <div class="chapter-name">Innovation Leader</div>
+        </a>
+    </div>
+
+    <nav class="nav-section">
+        <div class="nav-container">
+            <div class="nav-logo">Takumi Someya</div>
+            <div class="nav-menu">
+                <a href="#identity" class="nav-item">Identity</a>
+                <a href="#journey" class="nav-item active">Journey</a>
+                <a href="#foundation" class="nav-item">Foundation</a>
+                <a href="#evolution" class="nav-item">Evolution</a>
+                <a href="#transformation" class="nav-item">Transformation</a>
+                <a href="#mastery" class="nav-item">Mastery</a>
+                <a href="#future" class="nav-item">Future</a>
+                <a href="#connect" class="nav-item">Connect</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="main-hero-section" id="hero">
+        <div class="main-hero-container">
+            <div class="main-hero-image-wrapper">
+                <img src="1000023813.jpg" alt="Takumi Someya - Profile Picture">
+            </div>
+            <div class="main-hero-text-content">
+                <h1 class="main-hero-name">Takumi Someya</h1>
+                <p class="main-hero-tagline">Strategic Product Visionary & AI Innovation Leader</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="core-identity-section" id="identity">
+        <div class="identity-container">
+            <div class="chapter-header">
+                <div class="chapter-number">Core Identity</div>
+                <h2 class="chapter-title">The Invisible Navigator</h2>
+                <p class="chapter-subtitle">
+                    Bridging the seen and unseen, the rational and intuitive, to create meaningful value 
+                    that transforms complexity into human connection and brings smiles to people's faces.
+                </p>
+            </div>
+
+            <div class="identity-grid">
+                <div class="origin-story">
+                    <div class="story-header">
+                        <div class="story-icon">🌟</div>
+                        <h3 class="story-title">The Defining Moment</h3>
+                    </div>
+                    <p class="story-content">
+                        When I was in junior high school, through interactions with people from around the world 
+                        at the RoboCup Junior World Championship, I made an important discovery. I experienced firsthand 
+                        that in this same world I live in, there exist completely different cultures, values, and 
+                        environments from my own perspective. This was not merely information learned from textbooks, 
+                        but something far more complex and intuitive.
+                    </p>
+                    <p class="story-content">
+                        I find romance and beauty in trying to see the invisible. And I also find beauty in the 
+                        transience of what can never be fully unraveled. This is why I am deeply fascinated by 
+                        combining theoretical analytical ability, intuitive insight, and human empathy. Technology 
+                        is a means, and my true purpose is to create and deliver value that brings smiles to people's faces.
+                    </p>
+                </div>
+
+                <div class="benefits-framework">
+                     <div class="benefit-card functional">
+                        <div class="benefit-header">
+                            <div class="benefit-icon">⚙️</div>
+                            <h4 class="benefit-title">Systems Integration</h4>
+                            <div class="benefit-subtitle">What I Deliver</div>
+                        </div>
+                        <div class="benefit-content">
+                            <div class="benefit-description">
+                                Transforming complex technical ecosystems into cohesive solutions through 
+                                systematic integration of people, processes, and technology at enterprise scale.
+                            </div>
+                            <div class="benefit-metrics">
+                                <div class="metric-item">
+                                    <span class="metric-value">10,000+</span>
+                                    <span class="metric-label">Systems Integrated</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-value">$168K</span>
+                                    <span class="metric-label">ARR Generated</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card emotional">
+                        <div class="benefit-header">
+                            <div class="benefit-icon">💡</div>
+                            <h4 class="benefit-title">Clarity in Complexity</h4>
+                            <div class="benefit-subtitle">How You Feel</div>
+                        </div>
+                        <div class="benefit-content">
+                            <div class="benefit-description">
+                                Creating confidence through the ability to navigate uncertainty, see patterns 
+                                in chaos, and bridge the gap between technical possibility and human understanding.
+                            </div>
+                            <div class="emotional-indicators">
+                                <span class="indicator">Pattern Recognition</span>
+                                <span class="indicator">Intuitive Guidance</span>
+                                <span class="indicator">Human-Centered Solutions</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card expression">
+                        <div class="benefit-header">
+                            <div class="benefit-icon">🌟</div>
+                            <h4 class="benefit-title">The Invisible Navigator</h4>
+                            <div class="benefit-subtitle">Who You Become</div>
+                        </div>
+                        <div class="benefit-content">
+                            <div class="benefit-description">
+                                Embodying the rare ability to see beyond the visible, to navigate unseen connections, 
+                                and to transform abstract insights into tangible value that resonates with human hearts.
+                            </div>
+                            <div class="expression-values">
+                                <span class="value">Invisible Navigator</span>
+                                <span class="value">Bridge Builder</span>
+                                <span class="value">Value Creator</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="jobs-framework">
+                    <h3 class="framework-title">The Jobs I'm Hired to Do</h3>
+                    <div class="jobs-grid">
+                        <div class="job-card">
+                            <div class="job-icon">🔍</div>
+                            <h4 class="job-title">When the invisible becomes critical</h4>
+                            <p class="job-description">
+                                Hire me to uncover hidden patterns, cultural nuances, and emotional undercurrents 
+                                that traditional analysis misses, transforming complexity into clarity.
+                            </p>
+                        </div>
+                        <div class="job-card">
+                            <div class="job-icon">🌉</div>
+                            <h4 class="job-title">When technical and human worlds collide</h4>
+                            <p class="job-description">
+                                Hire me to bridge the gap between analytical precision and human empathy, 
+                                creating solutions that work both logically and emotionally.
+                            </p>
+                        </div>
+                        <div class="job-card">
+                            <div class="job-icon">😊</div>
+                            <h4 class="job-title">When impact must create genuine connection</h4>
+                            <p class="job-description">
+                                Hire me to transform sophisticated technology into experiences that resonate 
+                                with human hearts and bring authentic smiles to people's faces.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="journey-path-section" id="journey">
+        <div class="path-container">
+            <div class="chapter-header">
+                <div class="chapter-number">Professional Journey</div>
+                <h2 class="chapter-title">Leading Strategy, Insights, and Product Engineering</h2>
+                <p class="chapter-subtitle"> 
+                    Driving Business Growth with Multifaceted Expertise—from telecommunications infrastructure 
+                    to AI-powered platforms, delivering measurable impact across enterprise ecosystems.
+                </p>
+            </div>
+
+            <svg class="journey-svg" viewBox="0 0 1200 300">
+                <path id="journeyPath" 
+                      d="M 100 250 Q 300 150 500 100 Q 700 50 900 120 Q 1000 150 1100 80" 
+                      stroke="url(#gradient)" 
+                      stroke-width="6" 
+                      fill="none" 
+                      stroke-dasharray="15,5"
+                      stroke-dashoffset="1000"
+                      style="animation: pathDraw 4s ease 1s forwards;"/>
+                <defs>
+                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#10b981"/>
+                        <stop offset="25%" style="stop-color:#3b82f6"/>
+                        <stop offset="50%" style="stop-color:#8b5cf6"/>
+                        <stop offset="75%" style="stop-color:#f59e0b"/>
+                        <stop offset="100%" style="stop-color:#06b6d4"/>
+                    </linearGradient>
+                </defs>
+                <circle cx="100" cy="250" r="15" fill="#10b981" opacity="0" class="journey-point" 
+                        data-tooltip="Foundation Builder|Master's in Electrical Engineering, specialized in systems engineering and C/C++ development at DENSO Corporation."
+                        style="animation: fadeInUp 0.6s ease 2s forwards; cursor: pointer;">
+                    <animate attributeName="r" values="15;20;15" dur="2s" repeatCount="indefinite" begin="2s"/>
+                </circle>
+                <circle cx="350" cy="125" r="15" fill="#3b82f6" opacity="0" class="journey-point"
+                        data-tooltip="Systems Integration Leader|Led cross-functional teams of 10+ members managing 10,000+ signal integrations at DENSO Corporation."
+                        style="animation: fadeInUp 0.6s ease 2.5s forwards; cursor: pointer;">
+                    <animate attributeName="r" values="15;20;15" dur="2s" repeatCount="indefinite" begin="2.5s"/>
+                </circle>
+                <circle cx="600" cy="75" r="15" fill="#8b5cf6" opacity="0" class="journey-point"
+                        data-tooltip="Strategic Transformer|Earned MBA/MBAN from Hult International Business School, bridging technical expertise with business strategy."
+                        style="animation: fadeInUp 0.6s ease 3s forwards; cursor: pointer;">
+                    <animate attributeName="r" values="15;20;15" dur="2s" repeatCount="indefinite" begin="3s"/>
+                </circle>
+                <circle cx="850" cy="145" r="15" fill="#f59e0b" opacity="0" class="journey-point"
+                        data-tooltip="AI Strategy Architect|Leading AI-powered platform development at Sumitomo Electric, achieving $168K ARR projection and enterprise transformation."
+                        style="animation: fadeInUp 0.6s ease 3.5s forwards; cursor: pointer;">
+                    <animate attributeName="r" values="15;20;15" dur="2s" repeatCount="indefinite" begin="3.5s"/>
+                </circle>
+                <circle cx="1100" cy="80" r="15" fill="#06b6d4" opacity="0" class="journey-point"
+                        data-tooltip="Innovation Leader|Driving global telecommunications transformation and AI-first product strategies with enterprise-scale impact."
+                        style="animation: fadeInUp 0.6s ease 4s forwards; cursor: pointer;">
+                    <animate attributeName="r" values="15;20;15" dur="2s" repeatCount="indefinite" begin="4s"/>
+                </circle>
+                <text x="100" y="280" text-anchor="middle" fill="#10b981" font-size="14" font-weight="700" opacity="0" style="animation: fadeInUp 0.6s ease 2.2s forwards;">Foundation</text>
+                <text x="350" y="155" text-anchor="middle" fill="#3b82f6" font-size="14" font-weight="700" opacity="0" style="animation: fadeInUp 0.6s ease 2.7s forwards;">Evolution</text>
+                <text x="600" y="105" text-anchor="middle" fill="#8b5cf6" font-size="14" font-weight="700" opacity="0" style="animation: fadeInUp 0.6s ease 3.2s forwards;">Transformation</text>
+                <text x="850" y="175" text-anchor="middle" fill="#f59e0b" font-size="14" font-weight="700" opacity="0" style="animation: fadeInUp 0.6s ease 3.7s forwards;">Mastery</text>
+                <text x="1100" y="110" text-anchor="middle" fill="#06b6d4" font-size="14" font-weight="700" opacity="0" style="animation: fadeInUp 0.6s ease 4.2s forwards;">Future</text>
+            </svg>
+            
+            <div class="tooltip" id="pathTooltip">
+                <div class="tooltip-title"></div>
+                <div class="tooltip-content"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter-section" id="foundation">
+        <div class="chapter-container">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter Ⅰ</div>
+                <h2 class="chapter-title">Foundation</h2>
+                <p class="chapter-subtitle">
+                    Aspirations and Realities in Engineering: Finding a Glimmer of the Future Amidst Rigorous University Studies.
+                </p>
+            </div>
+
+            <div class="journey-timeline">
+                <div class="journey-line"></div>
+                
+                <div class="journey-item">
+                    <div class="journey-content">
+                        <div class="journey-era">2014-2016 • The Academic Foundation</div>
+                        <h3 class="journey-title">Master's in Electrical Engineering</h3>
+                        <div class="journey-company">Tokyo University of Science</div>
+                        <p class="journey-story">
+                            When I began studying electrical engineering and information systems at Tokyo University of Science, I was often overwhelmed by the depth of the specialized fields. Subjects like system design and signal processing were particularly challenging, and I hit many walls. Each time, however, I keenly felt the importance of persevering with the question, 'Why is this so?' The sense of relief and accomplishment I felt after late nights of discussions with peers and finally grasping a solution remains vivid. These experiences of trial and error are the very origin of my spirit of inquiry and problem-solving abilities.
+                        </p>
+                        <div class="journey-achievements">
+                            <div class="achievement-metric">
+                                <span class="achievement-value">M.S.</span>
+                                <div class="achievement-label">Electrical Engineering</div>
+                            </div>
+                            <div class="achievement-metric">
+                                <span class="achievement-value">B.S.</span>
+                                <div class="achievement-label">Information Engineering</div>
+                            </div>
+                            <div class="achievement-metric">
+                                <span class="achievement-value">Top Tier</span>
+                                <div class="achievement-label">University Ranking</div>
+                            </div>
+                        </div>
+                        <div class="journey-skills">
+                            <span class="skill-tag">Electrical Engineering</span>
+                            <span class="skill-tag">Information Systems</span>
+                            <span class="skill-tag">Signal Processing</span>
+                            <span class="skill-tag">System Design</span>
+                            <span class="skill-tag">Research Methodology</span>
+                        </div>
+                    </div>
+                    <div class="journey-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter-section" id="evolution">
+        <div class="chapter-container">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter Ⅱ</div>
+                <h2 class="chapter-title">Evolution</h2>
+                <p class="chapter-subtitle">
+                    Venturing into the Professional Tech World and Navigating the Challenges of Leadership: Discovering the Joy of Team Achievement Under Pressure.
+                </p>
+            </div>
+
+            <div class="journey-timeline">
+                <div class="journey-line"></div>
+                
+                <div class="journey-item">
+                    <div class="journey-content">
+                        <div class="journey-era">2016-2022 • The Systems Leader Era</div>
+                        <h3 class="journey-title">Lead System Integration Engineer</h3>
+                        <div class="journey-company">DENSO Corporation</div>
+                        <p class="journey-story">
+                            My career at DENSO Corporation was a continuous series of practical applications. As an engineer involved in large-scale automotive component software development, I truly felt the weight of responsibility for the code I released to the world. When I was first entrusted as a technical leader, I struggled to grasp the entirety of systems involving over 10,000 signals, and there were nights I felt overwhelmed by the pressure. However, through intense discussions, and at times, constructive disagreements with a diverse team of over 10 members, we united towards the common goal of improving the reliability of next-generation platforms. It was then I discovered the immense sense of accomplishment that individual effort alone cannot bring, and the true wonder of working as a team.
+                        </p>
+                        <div class="journey-achievements">
+                            <div class="achievement-metric">
+                                <span class="achievement-value">10,000+</span>
+                                <div class="achievement-label">Signal Integrations</div>
+                            </div>
+                            <div class="achievement-metric">
+                                <span class="achievement-value">10+</span>
+                                <div class="achievement-label">Team Members Led</div>
+                            </div>
+                            <div class="achievement-metric">
+                                <span class="achievement-value">6</span>
+                                <div class="achievement-label">Years Excellence</div>
+                            </div>
+                            <div class="achievement-metric">
+                                <span class="achievement-value">C/C++</span>
+                                <div class="achievement-label">Architecture Lead</div>
+                            </div>
+                        </div>
+                        <div class="journey-skills">
+                            <span class="skill-tag">Team Leadership</span>
+                            <span class="skill-tag">C/C++ Architecture</span>
+                            <span class="skill-tag">Systems Integration</span>
+                            <span class="skill-tag">Cross-functional Management</span>
+                            <span class="skill-tag">Automotive Systems</span>
+                            <span class="skill-tag">Signal Processing</span>
+                        </div>
+                    </div>
+                    <div class="journey-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter-section" id="transformation">
+        <div class="chapter-container">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter Ⅲ</div>
+                <h2 class="chapter-title">Transformation</h2>
+                <p class="chapter-subtitle">
+                    Questioning My Path as an Engineer: A Challenging Leap into the Unfamiliar Territory of Business to Learn Its Language.
+                </p>
+            </div>
+
+            <div class="journey-timeline">
+                <div class="journey-line"></div>
+                
+                <div class="journey-item">
+                    <div class="journey-content">
+                        <div class="journey-era">2022-2024 • The Business Strategist Era</div>
+                        <h3 class="journey-title">MBA/MBAN Graduate</h3>
+                        <div class="journey-company">Hult International Business School - San Francisco</div>
+                        <p class="journey-story">
+                            This period of change began when I started to wonder if my technical skills alone were enough to create truly valuable things. Driven by a strong desire to contribute to business from a broader perspective, I left my familiar environment and knocked on the doors of Hult International Business School in San Francisco. The dual MBA and Master of Business Analytics degree was a true leap into the unknown. Advanced discussions in English and project work with classmates from diverse cultural backgrounds were stimulating, but there were also many moments I keenly felt my own inadequacies. However, by diligently studying business strategy and data analytics amidst these challenges, I feel I began to see my role as a 'translator' bridging technology and business.
+                        </p>
+                        <div class="journey-achievements">
+                            <div class="achievement-metric">
+                                <span class="achievement-value">MBA</span>
+                                <div class="achievement-label">Business Administration</div>
+                            </div>
+                            <div class="achievement-metric">
+                                <span class="achievement-value">MBAN</span>
+                                <div class="achievement-label">Business Analytics</div>
+                            </div>
+                            <div class="achievement-metric">
+                                <span class="achievement-value">2024</span>
+                                <div class="achievement-label">Graduation Year</div>
+                            </div>
+                            <div class="achievement-metric">
+                                <span class="achievement-value">SF</span>
+                                <div class="achievement-label">Silicon Valley Hub</div>
+                            </div>
+                        </div>
+                        <div class="journey-skills">
+                            <span class="skill-tag">Strategic Planning</span>
+                            <span class="skill-tag">Business Analytics</span>
+                            <span class="skill-tag">Market Analysis</span>
+                            <span class="skill-tag">Financial Modeling</span>
+                            <span class="skill-tag">Data Science</span>
+                            <span class="skill-tag">Leadership Development</span>
+                            <span class="skill-tag">Innovation Strategy</span>
+                        </div>
+                    </div>
+                    <div class="journey-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter-section" id="mastery">
+        <div class="chapter-container">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter Ⅳ</div>
+                <h2 class="chapter-title">Mastery</h2>
+                <p class="chapter-subtitle">
+                    With Technology and Business as Two Wings, Soaring into AI Strategy: Shaping the Future with My Team Through Ongoing Trials and Learning.
+                </p>
+            </div>
+
+            <div class="journey-timeline">
+                <div class="journey-line"></div>
+                
+                <div class="journey-item">
+                    <div class="journey-content">
+                        <div class="journey-era">2024-Present • The AI Innovation Era</div>
+                        <h3 class="journey-title">AI Strategy & Product Management Lead</h3>
+                        <div class="journey-company">Sumitomo Electric Lightwave</div>
+                        <p class="journey-story">
+                            At Sumitomo Electric Lightwave, I'm responsible for AI strategy and product management, a role that truly feels like a culmination of my experiences so far. Every day, our team brainstorms how to connect AI technology to business value. In developing a mobile app for a technical community, I faced the difficulty of uncovering users' hidden needs and the joy when those needs were successfully addressed and brought to form. Working on company-wide strategy also requires tenacity in building consensus among diverse stakeholders. There are successes, but of course, also many points for reflection and learning. However, I find great fulfillment in the process of shaping AI-driven transformation step by step, even amidst uncertainty.
+                        </p>
+                        <div class="journey-achievements">
+                            <div class="achievement-metric">
+                                <span class="achievement-value">$168K</span>
+                                <div class="achievement-label">Projected ARR</div>
+                            </div>
+                            <div class="achievement-metric">
+                                <span class="achievement-value">50+</span>
+                                <div class="achievement-label">AI Product Concepts</div>
+                            </div>
+                            <div class="achievement-metric">
+                                <span class="achievement-value">20K</span>
+                                <div class="achievement-label">Target User Scale</div>
+                            </div>
+                            <div class="achievement-metric">
+                                <span class="achievement-value">10-Day</span>
+                                <div class="achievement-label">Sprint Deployment</div>
+                            </div>
+                        </div>
+                        <div class="journey-skills">
+                            <span class="skill-tag">AI Strategy</span>
+                            <span class="skill-tag">Product Management</span>
+                            <span class="skill-tag">React Native</span>
+                            <span class="skill-tag">Generative AI</span>
+                            <span class="skill-tag">Business Transformation</span>
+                            <span class="skill-tag">Market Analysis</span>
+                            <span class="skill-tag">Customer Segmentation</span>
+                        </div>
+                    </div>
+                    <div class="journey-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="future-section" id="future">
+        <div class="future-content">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter Ⅴ</div>
+                <h2 class="chapter-title">Future</h2>
+                <p class="chapter-subtitle">
+                    More Smiles Through the Power of AI: Aiming for Grounded Contributions, Carrying Forward the Learnings and Aspirations from My Journey.
+                </p>
+            </div>
+
+            <div class="future-grid">
+                <div class="future-text">
+                    <h3 class="journey-title">Co-creating a Better Future with AI</h3>
+                    <p class="journey-story">
+                        Looking back, my path as an engineer has always been a series of questions: 'Why? How can this be better?' Underlying it all is the desire I felt at RoboCup: 'to understand different perspectives and create something together.' Now, with the powerful tool of AI in hand, this desire has only grown stronger. I want to transform all the difficulties and joys I've experienced into strength, merge my technical and business knowledge, and pursue genuinely useful AI applications in the real world. Rather than grand revolutions, my current goal is to stay close to people's daily lives and continue to steadily deliver value that can bring even a few more smiles to faces.
+                    </p>
+                </div>
+                <div class="future-vision">
+                    <div class="vision-roadmap">
+                        <div class="vision-milestone">
+                            <div class="milestone-year">2025</div>
+                            <div>
+                                <div class="milestone-title">Scale AI Platform</div>
+                                <div class="milestone-desc">Expand AI product portfolio and enterprise adoption</div>
+                            </div>
+                        </div>
+                        <div class="vision-milestone">
+                            <div class="milestone-year">2027</div>
+                            <div>
+                                <div class="milestone-title">Global Market Leadership</div>
+                                <div class="milestone-desc">Establish dominant position in AI-powered telecommunications</div>
+                            </div>
+                        </div>
+                        <div class="vision-milestone">
+                            <div class="milestone-year">2030+</div>
+                            <div>
+                                <div class="milestone-title">Industry Transformation</div>
+                                <div class="milestone-desc">Drive ecosystem-wide digital innovation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="connect">
+        <div class="cta-container">
+            <h2 class="cta-title">Ready to Build the Future?</h2>
+            <p class="cta-description">
+                Partner with a proven leader who combines engineering excellence with strategic vision. 
+                From systems integration to AI innovation, let's create transformational impact together.
+            </p>
+            <div class="cta-buttons">
+                <a href="https://www.linkedin.com/in/takumi-s-9985b8b5/" class="cta-button">Connect Today</a>
+                <a href="#journey" class="cta-button secondary">View Journey</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="floating-element" style="top: 20%; left: 10%;">⚡</div>
+    <div class="floating-element" style="top: 60%; right: 15%;">🚀</div>
+    <div class="floating-element" style="top: 80%; left: 20%;">💡</div>
+
+    <script>
+        // Progress Bar
+        function updateProgressBar() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        }
+
+        // Smooth scrolling for navigation
+        function setupSmoothScrolling() {
+            document.querySelectorAll('.nav-item, .chapter-nav-item, .cta-button.secondary').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId && targetId.startsWith('#')) {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            const navElement = document.querySelector('.nav-section');
+                            const navHeight = navElement ? navElement.offsetHeight : 0;
+                            
+                            const progressBarElement = document.querySelector('.progress-indicator');
+                            const progressBarHeight = progressBarElement ? progressBarElement.offsetHeight : 0;
+                            
+                            let offsetPosition = targetElement.offsetTop - navHeight - progressBarHeight;
+                            
+                            if (targetId === '#hero') {
+                                offsetPosition = targetElement.offsetTop - (navHeight + progressBarHeight);
+                            }
+
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+        }
+
+
+        // Update active navigation items
+        function updateActiveNavigation() {
+            const sections = document.querySelectorAll('section[id]');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            const navElement = document.querySelector('.nav-section');
+            const navHeight = navElement ? navElement.offsetHeight : 0;
+            
+            const progressBarElement = document.querySelector('.progress-indicator');
+            const progressBarHeight = progressBarElement ? progressBarElement.offsetHeight : 0;
+            
+            const scrollPosition = window.pageYOffset + navHeight + progressBarHeight + 20; 
+
+            let current = '';
+            const heroSection = document.getElementById('hero');
+            if (heroSection && window.pageYOffset < (heroSection.offsetTop + heroSection.offsetHeight - (navHeight + progressBarHeight + 20) )) {
+                 current = 'hero'; 
+            } else {
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollPosition >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+            }
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === '#' + current) {
+                    item.classList.add('active');
+                } else if (current === 'hero' && item.getAttribute('href') === '#identity') {
+                }
+            });
+        }
+
+        // Animate journey items on scroll
+        function animateOnScroll() {
+            const items = document.querySelectorAll('.journey-item');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            items.forEach(item => observer.observe(item));
+        }
+
+        // SVG Tooltip functionality
+        function setupSVGTooltips() {
+            const tooltip = document.getElementById('pathTooltip');
+            const journeyPoints = document.querySelectorAll('.journey-point');
+            const GAP = 3; // Distance between point and tooltip arrow tip
+
+            if (!tooltip) return; 
+
+            journeyPoints.forEach(point => {
+                point.addEventListener('mouseenter', function(e) {
+                    const tooltipData = this.getAttribute('data-tooltip');
+                    if (tooltipData) {
+                        const [title, content] = tooltipData.split('|');
+                        tooltip.querySelector('.tooltip-title').textContent = title;
+                        tooltip.querySelector('.tooltip-content').textContent = content;
+
+                        const pointRect = this.getBoundingClientRect(); 
+                        const svgElement = this.closest('svg');
+                        const pathContainer = document.querySelector('.path-container'); 
+                        
+                        if (!svgElement || !pathContainer) return;
+
+                        const svgRect = svgElement.getBoundingClientRect(); 
+                        const pathContainerRect = pathContainer.getBoundingClientRect();
+
+                        // Make tooltip temporarily visible but fully transparent to get accurate dimensions
+                        tooltip.style.visibility = 'hidden';
+                        tooltip.style.opacity = '0';
+                        // Temporarily remove transform that might affect offsetWidth/Height, or ensure it's applied if final state is used for measurement
+                        // The current CSS for .tooltip (non-show) has a transform, so offsetWidth/Height should be for that state.
+                        // If .show class changes dimensions significantly (e.g. via font-size), this could be an issue. For now, assuming dimensions are stable.
+
+                        const tooltipHeight = tooltip.offsetHeight;
+                        const tooltipWidth = tooltip.offsetWidth;
+                        
+                        tooltip.style.visibility = 'visible'; // Make it ready to be shown
+
+                        const pointCenterXInContainer = pointRect.left + pointRect.width / 2 - pathContainerRect.left;
+                        const pointTopYInContainer = pointRect.top - pathContainerRect.top;
+                        const pointBottomYInContainer = pointRect.bottom - pathContainerRect.top;
+
+                        let newLeft = pointCenterXInContainer; 
+                        let newTop = pointTopYInContainer - tooltipHeight - GAP;
+                        tooltip.classList.remove('placed-below');
+
+                        if (newTop < 0) { 
+                            newTop = pointBottomYInContainer + GAP;
+                            tooltip.classList.add('placed-below');
+                        }
+                        
+                        const tooltipHalfWidth = tooltipWidth / 2;
+                        const containerClientWidth = pathContainer.clientWidth; // Use clientWidth for inner width
+                        const paddingFromEdge = 5;
+
+                        if ((newLeft - tooltipHalfWidth) < paddingFromEdge) {
+                            newLeft = tooltipHalfWidth + paddingFromEdge;
+                        } else if ((newLeft + tooltipHalfWidth) > (containerClientWidth - paddingFromEdge)) {
+                            newLeft = containerClientWidth - tooltipHalfWidth - paddingFromEdge;
+                        }
+                        
+                        tooltip.style.left = newLeft + 'px';
+                        tooltip.style.top = newTop + 'px';
+                        tooltip.classList.add('show'); 
+                    }
+                });
+
+                point.addEventListener('mouseleave', function() {
+                    tooltip.classList.remove('show');
+                    tooltip.classList.remove('placed-below'); 
+                });
+            });
+        }
+
+
+        // Initialize all functionality
+        function init() {
+            setupSmoothScrolling();
+            animateOnScroll();
+            setupSVGTooltips();
+            
+            window.addEventListener('scroll', () => {
+                updateProgressBar();
+                updateActiveNavigation();
+            });
+            
+            updateProgressBar();
+            updateActiveNavigation(); 
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>
