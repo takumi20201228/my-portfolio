@@ -259,8 +259,10 @@
         }
 
         .story-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            width: 15rem; /* アイコンコンテナの幅 */
+            height: rem; /* アイコンコンテナの高さ */
+            overflow: hidden; /* はみ出した画像を隠し、object-fit:coverを有効にする */
+            margin: 0 auto 20px auto; /* アイコンブロックを中央に配置し、下に20pxのマージン */
         }
 
         .story-title {
@@ -1077,7 +1079,7 @@
             </div>
             <div class="main-hero-text-content">
                 <h1 class="main-hero-name">Takumi Someya</h1>
-                <p class="main-hero-tagline">Strategic Product Visionary & AI Innovation Leader</p>
+                <p class="main-hero-tagline">Strategic Product Visionary & Innovation Leader</p>
             </div>
         </div>
     </section>
@@ -1096,7 +1098,9 @@
             <div class="identity-grid">
                 <div class="origin-story">
                     <div class="story-header">
-                        <div class="story-icon">🌟</div>
+                        <div class="story-icon">
+                           <img src="telescope-01.png" alt="Insights" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
                         <h3 class="story-title">The Defining Moment</h3>
                     </div>
                     <p class="story-content">
@@ -1301,12 +1305,12 @@
                         </p>
                         <div class="journey-achievements">
                             <div class="achievement-metric">
-                                <span class="achievement-value">M.S.</span>
+                                <span class="achievement-value">Signal Processing</span>
                                 <div class="achievement-label">Electrical Engineering</div>
                             </div>
                             <div class="achievement-metric">
-                                <span class="achievement-value">B.S.</span>
-                                <div class="achievement-label">Information Engineering</div>
+                                <span class="achievement-value">Physics Mathematics</span>
+                                <div class="achievement-label">Electrical Engineering</div>
                             </div>
                             <div class="achievement-metric">
                                 <span class="achievement-value">Top Tier</span>
@@ -1455,7 +1459,7 @@
                         <h3 class="journey-title">AI Strategy & Product Management Lead</h3>
                         <div class="journey-company">Sumitomo Electric Lightwave</div>
                         <p class="journey-story">
-                            At Sumitomo Electric Lightwave, I'm responsible for AI strategy and product management, a role that truly feels like a culmination of my experiences so far. Every day, our team brainstorms how to connect AI technology to business value. In developing a mobile app for a technical community, I faced the difficulty of uncovering users' hidden needs and the joy when those needs were successfully addressed and brought to form. Working on company-wide strategy also requires tenacity in building consensus among diverse stakeholders. There are successes, but of course, also many points for reflection and learning. However, I find great fulfillment in the process of shaping AI-driven transformation step by step, even amidst uncertainty.
+                            At Sumitomo Electric Lightwave, I lead new product management for a community app platform and cloud-based management system as part of our strategy to create new revenue streams in the maturing telecommunications industry. This role truly represents the culmination of all my experiences to date. In this position, I conduct stakeholder-driven hypothesis validation at unprecedented speed by combining MBA theories with fieldwork insights and leveraging generative AI technology for rapid MVP development. Through mobile app development, I've experienced both the challenge of uncovering users' latent needs and the satisfaction of successfully capturing and translating them into solutions. This app is designed to create a shared space for people with vastly different backgrounds: essential workers and office workers. I find both challenge and fulfillment in hypothesizing their underlying needs and determining how to create solutions that serve both groups effectively.
                         </p>
                         <div class="journey-achievements">
                             <div class="achievement-metric">
@@ -1513,22 +1517,22 @@
                         <div class="vision-milestone">
                             <div class="milestone-year">2025</div>
                             <div>
-                                <div class="milestone-title">Scale AI Platform</div>
-                                <div class="milestone-desc">Expand AI product portfolio and enterprise adoption</div>
+                                <div class="milestone-title">Change Company's business process and mindsets</div>
+                                <div class="milestone-desc">Shift business approach from domestic, hardware to global, software while leading organizational capability enhancement</div>
                             </div>
                         </div>
                         <div class="vision-milestone">
                             <div class="milestone-year">2027</div>
                             <div>
                                 <div class="milestone-title">Global Market Leadership</div>
-                                <div class="milestone-desc">Establish dominant position in AI-powered telecommunications</div>
+                                <div class="milestone-desc">Establish dominant position with our products to generate new revenue stream</div>
                             </div>
                         </div>
                         <div class="vision-milestone">
                             <div class="milestone-year">2030+</div>
                             <div>
                                 <div class="milestone-title">Industry Transformation</div>
-                                <div class="milestone-desc">Drive ecosystem-wide digital innovation</div>
+                                <div class="milestone-desc">Drive ecosystem involving industriy leaders</div>
                             </div>
                         </div>
                     </div>
@@ -1539,13 +1543,13 @@
 
     <section class="cta-section" id="connect">
         <div class="cta-container">
-            <h2 class="cta-title">Ready to Build the Future?</h2>
+            <h2 class="cta-title">You Interested?</h2>
             <p class="cta-description">
                 Partner with a proven leader who combines engineering excellence with strategic vision. 
                 From systems integration to AI innovation, let's create transformational impact together.
             </p>
             <div class="cta-buttons">
-                <a href="https://www.linkedin.com/in/takumi-s-9985b8b5/" class="cta-button">Connect Today</a>
+                <a href="https://www.linkedin.com/in/takumi-s-9985b8b5/" class="cta-button">LinkedIn</a>
                 <a href="#journey" class="cta-button secondary">View Journey</a>
             </div>
         </div>
